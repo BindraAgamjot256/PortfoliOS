@@ -1,0 +1,14 @@
+{
+    "files.exclude": {
+        ".idea/**": true,
+        ".vscode/**": true,
+        "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.svn": true,
+        "**/CVS": true,
+        "**/Thumbs.db": true
+    },
+    "hide-files.files": [],
+    "files.autoSave": "onFocusChange"
+}
