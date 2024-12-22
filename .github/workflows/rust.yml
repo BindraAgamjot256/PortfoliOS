@@ -17,4 +17,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Run tests
-      run: cargo test --verbose --target x86_64-portfoliOS.json
+      run: cargo +nightly test --verbose --target x86_64-portfoliOS.json
