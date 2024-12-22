@@ -16,7 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Install Rust nightly
-      run: rustup toolchain install nightly && rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
+    - name: Install Rust nightly and other required components
+      run: rustup toolchain install nightly && rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu && rustup component add llvm-tools-preview && cargo install bootimage 
+    
     - name: Run tests
       run: cargo +nightly test --verbose --target x86_64-PortfoliOS.json
