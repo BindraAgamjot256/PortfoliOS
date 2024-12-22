@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  issues: write
+  contents: read
+
+
 env:
   CARGO_TERM_COLOR: always
 
@@ -15,7 +20,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install dependencies
         run: |
           sudo apt-get update
@@ -27,19 +32,50 @@ jobs:
           toolchain: nightly
           override: true
           components: rust-src, llvm-tools-preview
-          
+
       - name: Install bootimage
         run: cargo install bootimage
-        
+
       - name: Add custom target
         run: |
           mkdir -p ~/.cargo
           echo '[build]' > ~/.cargo/config.toml
           echo 'target = "x86_64-PortfoliOS.json"' >> ~/.cargo/config.toml
-          
+
       - name: Build kernel
         run: cargo build --verbose
-        
-      - name: Run tests
-        run: cargo test --verbose
 
+      - name: Run tests
+        id: test
+        run: cargo test --verbose
+        continue-on-error: true
+        timeout-minutes: 10
+
+      - name: Create issue on test failure
+        if: steps.test.outcome == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const testOutput = `${{ steps.test.outputs.stderr || steps.test.outputs.stdout }}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔴 Test Failure in commit ${context.sha.slice(0, 7)}`,
+              body: `Tests failed in [commit ${context.sha}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/commit/${context.sha})
+            
+              <details>
+              <summary>Test Output</summary>
+            
+              \`\`\`
+              ${testOutput}
+              \`\`\`
+              </details>
+            
+              [View Run](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+              `,
+              labels: ['bug', 'test-failure']
+            });
+
+      - name: Fail workflow if tests failed
+        if: steps.test.outcome == 'failure'
+        run: exit 1
