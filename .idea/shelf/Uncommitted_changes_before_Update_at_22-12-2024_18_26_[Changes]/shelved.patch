@@ -1,0 +1,26 @@
+Index: .github/workflows/rust.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>name: Rust\r\n\r\non:\r\n  push:\r\n    branches: [ \"main\" ]\r\n  pull_request:\r\n    branches: [ \"main\" ]\r\n\r\nenv:\r\n  CARGO_TERM_COLOR: always\r\n\r\njobs:\r\n  build:\r\n\r\n    runs-on: ubuntu-latest\r\n\r\n    steps:\r\n    - uses: actions/checkout@v4\r\n    - name: Install Rust nightly\r\n      run: rustup toolchain install nightly\r\n    - name: Run tests\r\n      run: cargo +nightly test --verbose --target x86_64-PortfoliOS.json\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.github/workflows/rust.yml b/.github/workflows/rust.yml
+--- a/.github/workflows/rust.yml	(revision 717e660d11a3dfae70185c658d08673460825092)
++++ b/.github/workflows/rust.yml	(date 1734871863064)
+@@ -15,8 +15,9 @@
+     runs-on: ubuntu-latest
+ 
+     steps:
+-    - uses: actions/checkout@v4
+-    - name: Install Rust nightly
+-      run: rustup toolchain install nightly
+-    - name: Run tests
+-      run: cargo +nightly test --verbose --target x86_64-PortfoliOS.json
++      - uses: actions/checkout@v4
++      - name: Install Rust nightly and other required components
++        run: rustup toolchain install nightly && rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu && rustup component add llvm-tools-preview && cargo install bootimage
++
++      - name: Run tests
++        run: cargo +nightly test --verbose --target x86_64-PortfoliOS.json
+\ No newline at end of file

@@ -3,6 +3,7 @@ use lazy_static::lazy_static;
 use spin::Mutex;
 use volatile::Volatile;
 
+/// Represents the color codes for the VGA text mode.
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(u8)]
@@ -25,16 +26,24 @@ pub enum Color {
     White = 15,
 }
 
+/// Represents a color code combining foreground and background colors.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(transparent)]
 struct ColorCode(u8);
 
 impl ColorCode {
+    /// Creates a new `ColorCode` with the given foreground and background colors.
+    ///
+    /// # Arguments
+    ///
+    /// * `foreground` - The foreground color.
+    /// * `background` - The background color.
     fn new(foreground: Color, background: Color) -> ColorCode {
         ColorCode((background as u8) << 4 | (foreground as u8))
     }
 }
 
+/// Represents a character on the screen with an ASCII value and a color code.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(C)]
 struct ScreenChar {
@@ -42,13 +51,17 @@ struct ScreenChar {
     color_code: ColorCode,
 }
 
+/// The height of the VGA text buffer.
 const BUFFER_HEIGHT: usize = 25;
+/// The width of the VGA text buffer.
 const BUFFER_WIDTH: usize = 80;
 
+/// Represents the VGA text buffer.
 struct Buffer {
     chars: [[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT],
 }
 
+/// A writer type that allows writing to the VGA text buffer.
 pub struct Writer {
     column_position: usize,
     color_code: ColorCode,
@@ -56,6 +69,11 @@ pub struct Writer {
 }
 
 impl Writer {
+    /// Writes a single byte to the VGA text buffer.
+    ///
+    /// # Arguments
+    ///
+    /// * `byte` - The byte to write.
     pub fn write_byte(&mut self, byte: u8) {
         match byte {
             b'\n' => self.new_line(),
@@ -77,8 +95,13 @@ impl Writer {
         }
     }
 
-    pub fn write_string(&mut self, s: &str) {
-        for byte in s.bytes() {
+    /// Writes a string to the VGA text buffer.
+    ///
+    /// # Arguments
+    ///
+    /// * `string` - The string to write.
+    pub fn write_string(&mut self, string: &str) {
+        for byte in string.bytes() {
             match byte {
                 // printable ASCII byte or newline
                 0x20..=0x7e | b'\n' => self.write_byte(byte),
@@ -88,6 +111,7 @@ impl Writer {
         }
     }
 
+    /// Moves the cursor to a new line.
     fn new_line(&mut self) {
         for row in 1..BUFFER_HEIGHT {
             for col in 0..BUFFER_WIDTH {
@@ -99,6 +123,11 @@ impl Writer {
         self.column_position = 0;
     }
 
+    /// Clears a row in the VGA text buffer.
+    ///
+    /// # Arguments
+    ///
+    /// * `row` - The row to clear.
     fn clear_row(&mut self, row: usize) {
         let blank = ScreenChar {
             ascii_character: b' ',
@@ -111,6 +140,15 @@ impl Writer {
 }
 
 impl fmt::Write for Writer {
+    /// Writes a string to the VGA text buffer.
+    ///
+    /// # Arguments
+    ///
+    /// * `s` - The string to write.
+    ///
+    /// # Returns
+    ///
+    /// Returns `fmt::Result` indicating success or failure.
     fn write_str(&mut self, s: &str) -> fmt::Result {
         self.write_string(s);
         Ok(())
@@ -118,6 +156,7 @@ impl fmt::Write for Writer {
 }
 
 lazy_static! {
+    /// A lazy static instance of the `Writer` wrapped in a mutex.
     pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer {
         column_position: 0,
         color_code: ColorCode::new(Color::Yellow, Color::Black),
@@ -125,6 +164,7 @@ lazy_static! {
     });
 }
 
+/// reimplement the `print!` and `println!` macros to use the VGA text buffer
 #[macro_export]
 macro_rules! print {
     ($($arg:tt)*) => ($crate::vga_buffer::_print(format_args!($($arg)*)));
@@ -136,17 +176,26 @@ macro_rules! println {
     ($($arg:tt)*) => ($crate::print!("{}\n", format_args!($($arg)*)));
 }
 
+/// Prints formatted arguments to the VGA text buffer.
+///
+/// This function is used internally by the `print!` and `println!` macros to send formatted strings to the VGA text buffer.
+///
+/// # Arguments
+///
+/// * `args` - The formatted arguments to print.
 #[doc(hidden)]
 pub fn _print(args: fmt::Arguments) {
     use core::fmt::Write;
     WRITER.lock().write_fmt(args).unwrap();
 }
 
+/// A simple test case for the `println!` macro.
 #[test_case]
 fn test_println_simple() {
     println!("test_println_simple output");
 }
 
+/// A test case for the `println!` macro with many lines.
 #[test_case]
 fn test_println_many() {
     for _ in 0..200 {
@@ -154,6 +203,7 @@ fn test_println_many() {
     }
 }
 
+/// A test case for the `println!` macro to check the output.
 #[test_case]
 fn test_println_output() {
     let s = "Some test string that doesn't fits on a single line";
