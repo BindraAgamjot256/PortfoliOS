@@ -7,7 +7,14 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02849808-7bc1-4327-9b21-112bce4a08ea" name="Changes" comment="added the interrupts mechanism, and tests for it... &#10;&#10;also added documentation for entire codebase, except tests/*" />
+    <list default="true" id="02849808-7bc1-4327-9b21-112bce4a08ea" name="Changes" comment="added the interrupts mechanism, and tests for it... &#10;&#10;also added documentation for entire codebase, except tests/*">
+      <change afterPath="$PROJECT_DIR$/src/gdt.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/stack_overflow.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interrupts.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/interrupts.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,32 +65,34 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Cargo.Run PortfoliOS.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Run.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test PortfoliOS.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test interrupts::test_breakpoint_exception.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test trivial_assertion.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hp/Desktop/Projects/PortfoliOS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
-    &quot;org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon&quot;: &quot;&quot;,
-    &quot;org.rust.disableDetachedFileInspectionC:/Users/Hp/Desktop/Projects/PortfoliOS/tests/should_panic.rs&quot;: &quot;true&quot;,
-    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Cargo.Run PortfoliOS.executor": "Run",
+    "Cargo.Run.executor": "Run",
+    "Cargo.Test PortfoliOS.executor": "Run",
+    "Cargo.Test interrupts::test_breakpoint_exception.executor": "Run",
+    "Cargo.Test trivial_assertion.executor": "Run",
+    "Cargo.Test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Hp/Desktop/Projects/PortfoliOS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
+    "org.rust.disableDetachedFileInspectionC:/Users/Hp/Desktop/Projects/PortfoliOS/tests/should_panic.rs": "true",
+    "org.rust.disableDetachedFileInspectionC:/Users/Hp/Desktop/Projects/PortfoliOS/tests/stack_overflow.rs": "true",
+    "org.rust.first.attach.projects": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RsExternalLinterProjectSettings">
     <option name="tool" value="Clippy" />
   </component>
@@ -104,24 +113,6 @@
       <option name="redirectInputPath" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Test interrupts::test_breakpoint_exception" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
-      <option name="buildProfileId" value="test" />
-      <option name="command" value="test --package PortfoliOS --lib interrupts::test_breakpoint_exception -- --exact" />
-      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
-      <envs />
-      <option name="emulateTerminal" value="true" />
-      <option name="channel" value="DEFAULT" />
-      <option name="requiredFeatures" value="true" />
-      <option name="allFeatures" value="false" />
-      <option name="withSudo" value="false" />
-      <option name="buildTarget" value="REMOTE" />
-      <option name="backtrace" value="SHORT" />
-      <option name="isRedirectInput" value="false" />
-      <option name="redirectInputPath" value="" />
-      <method v="2">
-        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Test" type="CargoCommandRunConfiguration" factoryName="Cargo Command" nameIsGenerated="true">
       <option name="buildProfileId" value="test" />
       <option name="command" value="test --target x86_64-PortfoliOS.json --verbose" />
@@ -133,23 +124,15 @@
       <option name="allFeatures" value="true" />
       <option name="withSudo" value="false" />
       <option name="buildTarget" value="REMOTE" />
-      <option name="backtrace" value="SHORT" />
+      <option name="backtrace" value="FULL" />
       <option name="isRedirectInput" value="false" />
       <option name="redirectInputPath" value="" />
-      <method v="2">
-        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
-      </method>
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Cargo.Run" />
-      <item itemvalue="Cargo.Test interrupts::test_breakpoint_exception" />
       <item itemvalue="Cargo.Test" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Cargo.Test interrupts::test_breakpoint_exception" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="RustProjectSettings">
     <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
@@ -173,6 +156,7 @@
       <workItem from="1734951597618" duration="589000" />
       <workItem from="1734952406196" duration="779000" />
       <workItem from="1734957908876" duration="2598000" />
+      <workItem from="1734960652615" duration="2104000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -246,7 +230,39 @@
       <option name="project" value="LOCAL" />
       <updated>1734872789707</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="added the interrupts mechanism, and tests for it... &#10;&#10;also added documentation for entire codebase, except tests/*">
+      <option name="closed" value="true" />
+      <created>1734960828498</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1734960828498</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added the interrupts mechanism, and tests for it... &#10;&#10;also added documentation for entire codebase, except tests/*">
+      <option name="closed" value="true" />
+      <created>1734960865447</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1734960865447</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added the interrupts mechanism, and tests for it... &#10;&#10;also added documentation for entire codebase, except tests/*">
+      <option name="closed" value="true" />
+      <created>1734960876596</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1734960876596</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added the interrupts mechanism, and tests for it... &#10;&#10;also added documentation for entire codebase, except tests/*">
+      <option name="closed" value="true" />
+      <created>1734960883971</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1734960883971</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,7 +288,8 @@
     <MESSAGE value="set up testing" />
     <MESSAGE value="testing issue on test failure" />
     <MESSAGE value="works!! &#10;&#10;see previous commit for more info" />
-    <option name="LAST_COMMIT_MESSAGE" value="works!! &#10;&#10;see previous commit for more info" />
+    <MESSAGE value="added the interrupts mechanism, and tests for it... &#10;&#10;also added documentation for entire codebase, except tests/*" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the interrupts mechanism, and tests for it... &#10;&#10;also added documentation for entire codebase, except tests/*" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

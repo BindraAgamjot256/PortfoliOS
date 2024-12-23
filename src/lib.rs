@@ -6,9 +6,10 @@
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
+pub mod gdt;
 pub mod interrupts;
 pub mod serial;
-pub mod vga_buffer;
+pub mod vga_buffer; // gdt = Global Descriptor Table
 
 /// A trait for testable functions.
 ///
@@ -115,5 +116,6 @@ pub fn exit_qemu(exit_code: QemuExitCode) {
 ///
 /// This function sets up the Interrupt Descriptor Table (IDT).
 pub fn init() {
+    gdt::init();
     interrupts::init_idt();
 }
