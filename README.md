@@ -1,6 +1,7 @@
 # PortfoliOS
 
-This project is a simple operating system written in Rust. It is a text enviorment based mirror for my portfolio project which is simultaneously being developed.
+This project is a simple operating system written in Rust. It is a text environment based mirror for my portfolio
+project which is simultaneously being developed.
 
 ## Features
 
@@ -26,7 +27,7 @@ This project is a simple operating system written in Rust. It is a text enviorme
     rustup component add llvm-tools-preview --toolchain nightly
     ```
 
-2. Install `bootimage`:
+2. Install `bootimage` crate:
 
     ```sh
     cargo install bootimage
@@ -39,24 +40,27 @@ This project is a simple operating system written in Rust. It is a text enviorme
     sudo apt-get install -y qemu-system-x86
     ```
 
-### Building the Kernel
+### Running the Kernel
 
-To build the kernel, run:
+To run the kernel, run:
 
 ```sh
-cargo build --target x86_64-PortfoliOS.json
+cargo run --target x86_64-PortfoliOS.json
 ```
 
 
 ## TODO:
 - [x] VGA Buffer (for text output)
 - [x] Unit Testing
-- [x] Full Doc. coverage
+- [ ] Full Doc. coverage
 - [ ] CLI
+   - [x] Keyboard Input
+   - [ ] Commands
+   - [ ] Command History
+   - [ ] Interpreter for programming language
+- [ ] Full Kernel
 - [ ] File System
 - [x] CI/CD
-- [ ] Kernel rings (Ring 0, Ring 1, etc...)[^1]<br>![image](https://github.com/user-attachments/assets/eedc386a-46c3-4081-bee3-8efab6d014b5)
-
-
-
-[^1]:Image Copyright: [https://www.baeldung.com/cs/os-rings](https://www.baeldung.com/cs/os-rings)
+- [ ] Customisable Printing
+- [ ] Customisable VGA Buffer
+- [ ] Sandboxed programming language for user scripts 
