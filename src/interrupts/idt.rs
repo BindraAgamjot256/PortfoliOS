@@ -3,7 +3,8 @@ use x86_64::structures::idt::InterruptDescriptorTable;
 
 use crate::gdt;
 use crate::interrupts::handlers::{
-    breakpoint_handler, double_fault_handler, keyboard_interrupt_handler, timer_interrupt_handler,
+    breakpoint_handler, double_fault_handler, keyboard_interrupt_handler, page_fault_handler,
+    timer_interrupt_handler,
 };
 use crate::interrupts::index::InterruptIndex;
 
@@ -18,7 +19,7 @@ lazy_static! {
         }
         idt[InterruptIndex::Timer.as_usize()].set_handler_fn(timer_interrupt_handler);
         idt[InterruptIndex::Keyboard.as_usize()].set_handler_fn(keyboard_interrupt_handler);
-
+        idt.page_fault.set_handler_fn(page_fault_handler);
         idt
     };
 }

@@ -5,10 +5,14 @@ project which is simultaneously being developed.
 
 ## Features
 
-- VGA text buffer for text output
-- Custom `print!` and `println!` macros
-- Unit tests for kernel functionality
-
+| Feature      | Description                                     |
+|--------------|-------------------------------------------------|
+| VGA Buffer   | A simple VGA buffer for text output             |
+| Unit Testing | Unit tests for the kernel(Partially completed)  |
+| CI/CD        | Continuous Integration and Deployment           |
+| Keyboard     | Keyboard input for the CLI                      |
+| CLI          | Command Line Interface       (TODO)             |
+| Interpreter  | Interpreter for programming language     (TODO) |
 ## Getting Started
 
 ### Prerequisites
@@ -33,12 +37,19 @@ project which is simultaneously being developed.
     cargo install bootimage
     ```
 
-3. Install QEMU:
+    3. Install QEMU:
 
-    ```sh
-    sudo apt-get update
-    sudo apt-get install -y qemu-system-x86
+        ```shell
+        sudo apt-get update
+        sudo apt-get install -y qemu-system-x86
+        ```
+
+       OR
+   ```shell
+    brew install qemu
     ```
+   OR
+   WINDOWS:https://qemu.weilnetz.de/w64/
 
 ### Running the Kernel
 
@@ -48,6 +59,8 @@ To run the kernel, run:
 cargo run --target x86_64-PortfoliOS.json
 ```
 
+> [!NOTE]
+> The `--target` flag is unnecessary, as the default target is defined [here](./.cargo/config.toml).
 
 ## TODO:
 - [x] VGA Buffer (for text output)
@@ -61,6 +74,6 @@ cargo run --target x86_64-PortfoliOS.json
 - [ ] Full Kernel
 - [ ] File System
 - [x] CI/CD
-- [ ] Customisable Printing
+- [x] Customisable Printing
 - [ ] Customisable VGA Buffer
 - [ ] Sandboxed programming language for user scripts 
