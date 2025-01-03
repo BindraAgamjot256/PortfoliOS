@@ -18,10 +18,10 @@ struct Buffer {
     pub(crate) chars: [[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT],
 }
 
-pub struct Writer {
+pub(crate) struct Writer {
     column_position: usize,
     color_code: ColorCode,
-    pub(crate) buffer: &'static mut Buffer,
+    buffer: &'static mut Buffer,
 }
 
 impl Writer {
@@ -91,17 +91,6 @@ impl fmt::Write for Writer {
 
 lazy_static! {
     pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer {
-        column_position: 0,
-        color_code: ColorCode::new(
-            crate::vga_buffer::color_code::Color::Yellow,
-            crate::vga_buffer::color_code::Color::Black
-        ),
-        buffer: unsafe { &mut *(0xb8000 as *mut Buffer) },
-    });
-}
-
-lazy_static! {
-    pub static ref WRITER_COLORED: Mutex<Writer> = Mutex::new(Writer {
         column_position: 0,
         color_code: ColorCode::new(
             crate::vga_buffer::color_code::Color::Yellow,

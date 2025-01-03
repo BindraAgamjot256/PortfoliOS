@@ -8,20 +8,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02849808-7bc1-4327-9b21-112bce4a08ea" name="Changes" comment="Mainly, added paging, but also made many other small changes&#10;&#10;also edited README.md">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30-12-2024_19_24_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30-12-2024_19_24__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/memory.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vga_buffer/color_code.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vga_buffer/mod.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/vga_buffer/writing.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/allocator.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/heap_allocation.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.cargo/config.toml" beforeDir="false" afterPath="$PROJECT_DIR$/.cargo/config.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interrupts/handlers.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/interrupts/handlers.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interrupts/idt.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/interrupts/idt.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vga_buffer.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vga_buffer/writing.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/vga_buffer/writing.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +90,7 @@
     "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
     "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
     "org.rust.disableDetachedFileInspectionC:/Users/Hp/Desktop/Projects/PortfoliOS/src/vga_buffer.rs": "true",
+    "org.rust.disableDetachedFileInspectionC:/Users/Hp/Desktop/Projects/PortfoliOS/tests/heap_allocation.rs": "true",
     "org.rust.disableDetachedFileInspectionC:/Users/Hp/Desktop/Projects/PortfoliOS/tests/should_panic.rs": "true",
     "org.rust.disableDetachedFileInspectionC:/Users/Hp/Desktop/Projects/PortfoliOS/tests/stack_overflow.rs": "true",
     "org.rust.first.attach.projects": "true",
@@ -170,7 +166,8 @@
       <workItem from="1734960652615" duration="2104000" />
       <workItem from="1735562879610" duration="6541000" />
       <workItem from="1735630500361" duration="1857000" />
-      <workItem from="1735793865390" duration="8191000" />
+      <workItem from="1735793865390" duration="9486000" />
+      <workItem from="1735885499409" duration="2528000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -300,7 +297,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735566841338</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Mainly, added paging, but also made many other small changes&#10;&#10;also edited README.md">
+      <option name="closed" value="true" />
+      <created>1735802999318</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1735802999318</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
