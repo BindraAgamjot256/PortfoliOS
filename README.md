@@ -1,18 +1,19 @@
 # PortfoliOS
 
 This project is a simple operating system written in Rust. It is a text environment based mirror for my portfolio
-project which is simultaneously being developed.
+project which is simultaneously being developed (currently private, for those interested).
 
 ## Features
 
-| Feature      | Description                                     |
-|--------------|-------------------------------------------------|
-| VGA Buffer   | A simple VGA buffer for text output             |
-| Unit Testing | Unit tests for the kernel(Partially completed)  |
-| CI/CD        | Continuous Integration and Deployment           |
-| Keyboard     | Keyboard input for the CLI                      |
-| CLI          | Command Line Interface       (TODO)             |
-| Interpreter  | Interpreter for programming language     (TODO) |
+| Feature      | Description                                            |
+|--------------|--------------------------------------------------------|
+| VGA Buffer   | A simple VGA buffer for text output                    |
+| Unit Testing | Full Unit testing for the kernel(Partially completed)  |
+| CI/CD        | Continuous Integration and Deployment                  |
+| Keyboard     | Keyboard input for the CLI                             |
+| CLI          | Command Line Interface       (TODO)                    |
+| Interpreter  | Interpreter for programming language     (TODO)        |
+
 ## Getting Started
 
 ### Prerequisites
@@ -37,19 +38,20 @@ project which is simultaneously being developed.
     cargo install bootimage
     ```
 
-    3. Install QEMU:
+3. Install QEMU:
 
-        ```shell
-        sudo apt-get update
-        sudo apt-get install -y qemu-system-x86
-        ```
-
-       OR
    ```shell
-    brew install qemu
-    ```
+   # for Linux
+   sudo apt-get install -y qemu-system-x86
+   ```
+
    OR
-   WINDOWS:https://qemu.weilnetz.de/w64/
+   ```shell
+   # for MacOS
+   brew install qemu
+   ```
+   OR  
+   [for Windows](https://qemu.weilnetz.de/w64/)
 
 ### Running the Kernel
 
@@ -60,12 +62,12 @@ cargo run --target x86_64-PortfoliOS.json
 ```
 
 > [!NOTE]
-> The `--target` flag is unnecessary, as the default target is defined [here](./.cargo/config.toml).
+> The `--target` flag is unnecessary, as the default target is defined [here](./.cargo/config.toml) as PortfoliOS.
 
 ## TODO:
 - [x] VGA Buffer (for text output)
 - [x] Unit Testing
-- [ ] Full Doc. coverage
+- [ ] Full Documentation coverage
 - [ ] CLI
    - [x] Keyboard Input
    - [ ] Commands
