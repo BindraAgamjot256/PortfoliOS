@@ -18,7 +18,7 @@ struct Buffer {
     pub(crate) chars: [[Volatile<ScreenChar>; BUFFER_WIDTH]; BUFFER_HEIGHT],
 }
 
-pub(crate) struct Writer {
+pub struct Writer {
     column_position: usize,
     color_code: ColorCode,
     buffer: &'static mut Buffer,

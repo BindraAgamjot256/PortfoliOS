@@ -7,16 +7,10 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02849808-7bc1-4327-9b21-112bce4a08ea" name="Changes" comment="Mainly, added paging, but also made many other small changes&#10;&#10;also edited README.md">
-      <change afterPath="$PROJECT_DIR$/src/allocator.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/heap_allocation.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cargo/config.toml" beforeDir="false" afterPath="$PROJECT_DIR$/.cargo/config.toml" afterDir="false" />
+    <list default="true" id="02849808-7bc1-4327-9b21-112bce4a08ea" name="Changes" comment="Mainly, added heap allocation, but also made many other small changes&#10;&#10;also edited vga_buffer/writing.rs, to fix warnings">
+      <change afterPath="$PROJECT_DIR$/scripts/run.ps1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vga_buffer/writing.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/vga_buffer/writing.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,8 +74,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "Shell Script.Unnamed.executor": "Run",
+    "deletionFromPopupRequiresConfirmation": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Hp/Desktop/Projects/PortfoliOS",
+    "last_opened_file_path": "C:/Users/Hp/Desktop/Projects/PortfoliOS/scripts/run.ps1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -167,7 +163,8 @@
       <workItem from="1735562879610" duration="6541000" />
       <workItem from="1735630500361" duration="1857000" />
       <workItem from="1735793865390" duration="9486000" />
-      <workItem from="1735885499409" duration="2528000" />
+      <workItem from="1735885499409" duration="2930000" />
+      <workItem from="1735888777677" duration="482000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -305,7 +302,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735802999318</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Mainly, added heap allocation, but also made many other small changes&#10;&#10;also edited vga_buffer/writing.rs, to fix warnings">
+      <option name="closed" value="true" />
+      <created>1735888596966</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1735888596966</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,7 +340,8 @@
     <MESSAGE value="Mainly, added hardware interrupts, but also made many other small changes&#10;&#10;now, keyboard works...!!!" />
     <MESSAGE value="Forgot this" />
     <MESSAGE value="Mainly, added paging, but also made many other small changes&#10;&#10;also edited README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mainly, added paging, but also made many other small changes&#10;&#10;also edited README.md" />
+    <MESSAGE value="Mainly, added heap allocation, but also made many other small changes&#10;&#10;also edited vga_buffer/writing.rs, to fix warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mainly, added heap allocation, but also made many other small changes&#10;&#10;also edited vga_buffer/writing.rs, to fix warnings" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
