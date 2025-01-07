@@ -49,8 +49,11 @@ jobs:
         id: test
         run: cargo test --verbose
         continue-on-error: true
-        timeout-minutes: 10
-
+        
+        
+      - name: Cache Deps
+        uses: raviqqe/cargo-cache@v1
+        
       - name: Create issue on test failure
         if: steps.test.outcome == 'failure'
         uses: actions/github-script@v6
