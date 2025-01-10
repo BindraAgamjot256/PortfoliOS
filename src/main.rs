@@ -14,6 +14,7 @@ use PortfoliOS::vga_buffer::color_code::Color;
 use PortfoliOS::vga_buffer::print_colored;
 use PortfoliOS::{hlt_loop, println};
 
+//noinspection ALL
 /// Entry point for the PortfoliOS kernel.
 ///
 ///

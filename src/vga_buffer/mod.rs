@@ -1,3 +1,4 @@
+use crate::vga_buffer::color_code::ColorCode;
 use core::fmt;
 
 pub mod color_code;
@@ -19,7 +20,6 @@ pub fn _print(args: fmt::Arguments) {
     use core::fmt::Write;
     use x86_64::instructions::interrupts;
     interrupts::without_interrupts(|| {
-        // new
         writing::WRITER.lock().write_fmt(args).unwrap();
     });
 }
@@ -29,10 +29,10 @@ pub fn print_colored(color: color_code::Color, args: fmt::Arguments) {
     use x86_64::instructions::interrupts;
     interrupts::without_interrupts(|| {
         let mut writer = writing::WRITER.lock();
-        let color_code = color_code::ColorCode::new(color, color_code::Color::Black);
+        let color_code = ColorCode::new(color, color_code::Color::Black);
         writer.set_color(color_code);
         writer.write_fmt(args).unwrap();
-        writer.set_color(color_code::ColorCode::new(
+        writer.set_color(ColorCode::new(
             color_code::Color::Yellow,
             color_code::Color::Black,
         ));
@@ -41,4 +41,22 @@ pub fn print_colored(color: color_code::Color, args: fmt::Arguments) {
 
 pub fn println_colored(color: color_code::Color, args: fmt::Arguments) {
     print_colored(color, format_args!("{}\n", args));
+}
+
+pub fn print_custom(color_code: ColorCode, args: fmt::Arguments) {
+    use core::fmt::Write;
+    use x86_64::instructions::interrupts;
+    interrupts::without_interrupts(|| {
+        let mut writer = writing::WRITER.lock();
+        writer.set_color(color_code);
+        writer.write_fmt(args).unwrap();
+        writer.set_color(ColorCode::new(
+            color_code::Color::Yellow,
+            color_code::Color::Black,
+        ));
+    });
+}
+
+pub fn println_custom(color_code: ColorCode, args: fmt::Arguments) {
+    print_custom(color_code, format_args!("{}\n", args));
 }

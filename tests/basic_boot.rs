@@ -6,6 +6,7 @@
 
 use core::panic::PanicInfo;
 
+//noinspection ALL
 /// Entry point of the test.
 ///
 /// This function is called on boot and runs the `test_main` function,

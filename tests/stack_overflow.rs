@@ -11,13 +11,13 @@ use PortfoliOS::serial_print;
 /// then triggers a stack overflow to test the double fault handler.
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    serial_print!("stack_overflow::stack_overflow...\t");
+    serial_print!("stack_overflow::test_stack_overflow...\t");
 
     PortfoliOS::gdt::init();
     init_test_idt();
 
     // Trigger a stack overflow
-    stack_overflow();
+    test_stack_overflow();
 
     panic!("Execution continued after stack overflow");
 }
@@ -35,8 +35,8 @@ fn panic(info: &PanicInfo) -> ! {
 /// This function calls itself recursively without a base case,
 /// causing a stack overflow. The `volatile` read prevents tail call optimization.
 #[allow(unconditional_recursion)]
-fn stack_overflow() {
-    stack_overflow(); // For each recursion, the return address is pushed
+fn test_stack_overflow() {
+    test_stack_overflow(); // For each recursion, the return address is pushed
     volatile::Volatile::new(0).read(); // Prevent tail recursion optimizations
 }
 

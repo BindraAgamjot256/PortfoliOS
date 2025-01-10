@@ -79,3 +79,7 @@ cargo run --target x86_64-PortfoliOS.json
 - [x] Customisable Printing
 - [ ] Customisable VGA Buffer
 - [ ] Sandboxed programming language for user scripts 
+
+## Other cool features I added:
+
+- A python script, that creates a GUI, for easier debugging and testing, as well as building the project

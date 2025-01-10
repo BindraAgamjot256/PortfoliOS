@@ -14,6 +14,7 @@ use PortfoliOS::allocator::HEAP_SIZE;
 
 entry_point!(main);
 
+//noinspection ALL
 fn main(boot_info: &'static BootInfo) -> ! {
     use x86_64::VirtAddr;
     use PortfoliOS::allocator;
@@ -35,7 +36,7 @@ fn panic(info: &PanicInfo) -> ! {
 }
 
 #[test_case]
-fn simple_allocation() {
+fn test_simple_allocation() {
     let heap_value_1 = Box::new(41);
     let heap_value_2 = Box::new(13);
     assert_eq!(*heap_value_1, 41);
@@ -43,7 +44,7 @@ fn simple_allocation() {
 }
 
 #[test_case]
-fn large_vec() {
+fn test_large_vec() {
     let n = 1000;
     let mut vec = Vec::new();
     for i in 0..n {
@@ -53,9 +54,19 @@ fn large_vec() {
 }
 
 #[test_case]
-fn many_boxes() {
+fn test_many_boxes() {
     for i in 0..HEAP_SIZE {
         let x = Box::new(i);
         assert_eq!(*x, i);
     }
+}
+
+#[test_case]
+fn test_many_boxes_long_lived() {
+    let long_lived = Box::new(1); // new
+    for i in 0..HEAP_SIZE {
+        let x = Box::new(i);
+        assert_eq!(*x, i);
+    }
+    assert_eq!(*long_lived, 1); // new
 }

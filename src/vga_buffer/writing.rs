@@ -80,6 +80,12 @@ impl Writer {
     pub(crate) fn set_color(&mut self, color: ColorCode) {
         self.color_code = color;
     }
+    pub(crate) fn clear_screen(&mut self) {
+        for row in 0..BUFFER_HEIGHT {
+            self.clear_row(row);
+        }
+        self.column_position = 0;
+    }
 }
 
 impl fmt::Write for Writer {

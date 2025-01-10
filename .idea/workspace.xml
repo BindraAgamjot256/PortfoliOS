@@ -7,10 +7,20 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02849808-7bc1-4327-9b21-112bce4a08ea" name="Changes" comment="Mainly, added heap allocation, but also made many other small changes&#10;&#10;also edited vga_buffer/writing.rs, to fix warnings">
-      <change afterPath="$PROJECT_DIR$/scripts/run.ps1" afterDir="false" />
+    <list default="true" id="02849808-7bc1-4327-9b21-112bce4a08ea" name="Changes" comment="fixed a small typo, that broke the entire kernel">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30-12-2024_19_24_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30-12-2024_19_24__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/allocator.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/allocator/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vga_buffer/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/vga_buffer/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vga_buffer/writing.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/vga_buffer/writing.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/basic_boot.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/basic_boot.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/heap_allocation.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/heap_allocation.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/should_panic.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/should_panic.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/stack_overflow.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/stack_overflow.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +56,10 @@
     <option name="directoryName" value="yEP1PJm8" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="groupByToolId" value="true" />
+    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="showPreview" value="true" />
+    <option name="sortByName" value="true" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -90,10 +103,17 @@
     "org.rust.disableDetachedFileInspectionC:/Users/Hp/Desktop/Projects/PortfoliOS/tests/should_panic.rs": "true",
     "org.rust.disableDetachedFileInspectionC:/Users/Hp/Desktop/Projects/PortfoliOS/tests/stack_overflow.rs": "true",
     "org.rust.first.attach.projects": "true",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hp\Desktop\Projects\PortfoliOS\src\allocator" />
+      <recent name="C:\Users\Hp\Desktop\Projects\PortfoliOS\src\allocator\mod.rs" />
+    </key>
+  </component>
   <component name="RsExternalLinterProjectSettings">
     <option name="tool" value="Clippy" />
   </component>
@@ -164,7 +184,11 @@
       <workItem from="1735630500361" duration="1857000" />
       <workItem from="1735793865390" duration="9486000" />
       <workItem from="1735885499409" duration="2930000" />
-      <workItem from="1735888777677" duration="482000" />
+      <workItem from="1735888777677" duration="1120000" />
+      <workItem from="1736248255485" duration="3294000" />
+      <workItem from="1736254067513" duration="1214000" />
+      <workItem from="1736334413935" duration="2733000" />
+      <workItem from="1736484365016" duration="3678000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -310,11 +334,22 @@
       <option name="project" value="LOCAL" />
       <updated>1735888596966</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="fixed a small typo, that broke the entire kernel">
+      <option name="closed" value="true" />
+      <created>1735889491159</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1735889491159</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.py" />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
     <option name="UPDATE_COPYRIGHT" value="true" />
@@ -341,7 +376,8 @@
     <MESSAGE value="Forgot this" />
     <MESSAGE value="Mainly, added paging, but also made many other small changes&#10;&#10;also edited README.md" />
     <MESSAGE value="Mainly, added heap allocation, but also made many other small changes&#10;&#10;also edited vga_buffer/writing.rs, to fix warnings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mainly, added heap allocation, but also made many other small changes&#10;&#10;also edited vga_buffer/writing.rs, to fix warnings" />
+    <MESSAGE value="fixed a small typo, that broke the entire kernel" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed a small typo, that broke the entire kernel" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

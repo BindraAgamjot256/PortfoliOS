@@ -10,8 +10,8 @@ use PortfoliOS::{exit_qemu, serial_print, serial_println, QemuExitCode};
 /// If the function does not panic, it prints a failure message and exits QEMU with a failure code.
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    should_fail();
-    serial_println!("[test did not panic]");
+    test_should_fail();
+    serial_println!("[fail]");
     exit_qemu(QemuExitCode::Failed);
     loop {}
 }
@@ -19,8 +19,8 @@ pub extern "C" fn _start() -> ! {
 /// Function that is expected to fail.
 ///
 /// This function prints a message and asserts that 0 equals 1, which will cause a panic.
-fn should_fail() {
-    serial_print!("should_panic::should_fail...\t");
+fn test_should_fail() {
+    serial_print!("should_panic::test_should_fail...\t");
     assert_eq!(0, 1);
 }
 
