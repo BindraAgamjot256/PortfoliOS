@@ -1,18 +1,21 @@
 # PortfoliOS
+![rustfmt](https://github.com/BindraAgamjot256/PortfoliOS/actions/workflows/cargo-fmt.yml/badge.svg)
+![testing](https://github.com/BindraAgamjot256/PortfoliOS/actions/workflows/rust.yml/badge.svg)
 
 This project is a simple operating system written in Rust. It is a text environment based mirror for my portfolio
-project which is simultaneously being developed (currently private, for those interested).
+project which is simultaneously being developed (currently private, for those interested). It includes a shell(AgamShell or Ash), and a simple programming language, for user scripts.  
+
 
 ## Features
 
-| Feature      | Description                                            |
-|--------------|--------------------------------------------------------|
-| VGA Buffer   | A simple VGA buffer for text output                    |
-| Unit Testing | Full Unit testing for the kernel(Partially completed)  |
-| CI/CD        | Continuous Integration and Deployment                  |
-| Keyboard     | Keyboard input for the CLI                             |
-| CLI          | Command Line Interface       (TODO)                    |
-| Interpreter  | Interpreter for programming language     (TODO)        |
+| Feature      | Description                                             |
+|--------------|---------------------------------------------------------|
+| VGA Buffer   | A simple VGA buffer for text output                     |
+| Unit Testing | Full Unit testing for the kernel (Partially completed)  |
+| CI/CD        | Continuous Integration and Deployment                   |
+| Keyboard     | Keyboard input for the CLI                              |
+| CLI          | Command Line Interface       (TODO)                     |
+| Interpreter  | Interpreter for programming language     (TODO)         |
 
 ## Getting Started
 
@@ -83,3 +86,6 @@ cargo run --target x86_64-PortfoliOS.json
 ## Other cool features I added:
 
 - A python script, that creates a GUI, for easier debugging and testing, as well as building the project
+
+## Licence.
+This project is licenced under the MIT Licence. See the [License](./LICENSE) for more details
