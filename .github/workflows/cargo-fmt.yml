@@ -36,7 +36,7 @@ jobs:
       - name: Commit changes
         if: steps.changes.outputs.changes == 'true'
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
+          git config --global user.name 'BindraAgamjot256'
+          git config --global user.email 'ajs.bindra@proton.me'
           git commit -am "Apply cargo fmt changes"
           git push origin HEAD:main --force
