@@ -10,20 +10,21 @@ jobs:
   format:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write  # Necessary for creating a PR
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
           override: true
           components: rustfmt
-          
+
       - name: Format code
         run: cargo fmt --all
-        
+
       - name: Check for changes
         id: changes
         run: |
@@ -32,13 +33,28 @@ jobs:
           else
             echo "changes=false" >> $GITHUB_OUTPUT
           fi
-          
+
       - name: Commit changes
         if: steps.changes.outputs.changes == 'true'
         run: |
-            git config --global user.name "$GITHUB_ACTOR"
-            git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-            git checkout -b cargo-fmt
-            git commit -am "Apply cargo fmt changes"
-            git push origin HEAD:cargo-fmt --force
-        
+          git config --global user.name "$GITHUB_ACTOR"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+          # Check out or create the cargo-fmt branch
+          git checkout -B cargo-fmt
+
+          # Commit the formatting changes
+          git commit -am "Apply cargo fmt changes"
+
+          # Push the changes to the cargo-fmt branch
+          git push origin HEAD:cargo-fmt --force
+
+      - name: Create pull request
+        if: steps.changes.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: "Apply cargo fmt changes"
+          body: "This PR applies the formatting changes using cargo fmt."
+          head: cargo-fmt
+          base: main
+          draft: false
