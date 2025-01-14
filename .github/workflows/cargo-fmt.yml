@@ -38,7 +38,7 @@ jobs:
         run: |
             git config --global user.name "$GITHUB_ACTOR"
             git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-            git checkout cargo-fmt
+            git -b checkout cargo-fmt
             git commit -am "Apply cargo fmt changes"
             git push origin HEAD:cargo-fmt --force
         
