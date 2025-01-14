@@ -39,4 +39,4 @@ jobs:
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git commit -am "Apply cargo fmt changes"
-          git push origin HEAD:main
+          git push origin HEAD:main --force
