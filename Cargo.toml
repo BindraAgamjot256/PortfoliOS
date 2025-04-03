@@ -1,0 +1,17 @@
+# Cargo.toml
+
+[package]
+name = "portfolios"
+version = "0.1.0"
+edition = "2024"
+
+[build-dependencies]
+bootloader = "0.11"
+kernel = { path = "kernel", artifact = "bin", target ="x86_64-unknown-none" }
+
+[dependencies]
+# used for UEFI booting in QEMU
+ovmf-prebuilt = "0.1.0-alpha.1"
+
+[workspace]
+members = ["kernel"]
