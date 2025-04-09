@@ -484,6 +484,8 @@ impl FrameBufferWriter {
     ///
     /// - [Result<(), Infallible>] indicating success or failure.
     pub fn clear_screen(&mut self) -> Result<(), Infallible>{
+        self.cursor_x  =10;
+        self.cursor_y = 31;
         self.clear(ConsoleColor::Black.to_rgb888())
     }
 }

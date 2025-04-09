@@ -1,7 +1,6 @@
 use bootloader_api::info::FrameBufferInfo;
 use core::fmt;
 use core::marker::PhantomData;
-use embedded_graphics::draw_target::DrawTarget;
 use spin::Lazy;
 use spin::Mutex;
 use x86_64::instructions::interrupts::without_interrupts;
