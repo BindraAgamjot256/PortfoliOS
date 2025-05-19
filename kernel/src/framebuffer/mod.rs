@@ -6,7 +6,7 @@ pub mod writer;
 // Re-export commonly used functions and types for easier access
 pub use animation::{boot_animation, boot_finished};
 pub use color::ConsoleColor;
-pub use global_writer::{_print, _print_fmt, init_framebuffer_writer, update_cursor};
+pub use global_writer::{_print, print_fmt, init_framebuffer_writer, update_cursor};
 
 #[macro_export]
 macro_rules! print {

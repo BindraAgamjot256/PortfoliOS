@@ -34,8 +34,7 @@ pub fn kernel_main(boot_info: &'static mut BootInfo) -> ! {
     // We can continue with our main execution flow
     println!("Hello, World!");
     println!("\x1b[32mHello, World!\x1b[0m");
-    println!("{}", "Hi there!".fg(ConsoleColor::Red));
-
+    println!("{}", "Hi there!".fg(ConsoleColor::BrightCyan));
     GLOBAL_SHELL.lock().init();
 
     hlt_loop();
@@ -49,8 +48,6 @@ fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
     unsafe {
         serial_println!("SHUTTING DOWN...");
-        // FIXME the following line panics once, with integer multiplication error...
-        // acpi_shutdown(FADT_ADDR.lock().unwrap());
     }
     hlt_loop();
 }

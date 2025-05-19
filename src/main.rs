@@ -11,7 +11,7 @@ fn main() {
     println!("Using UEFI image at: {}", uefi_path);
 
     // Choose boot mode: set to true for UEFI, false for BIOS.
-    let use_uefi = true;
+    let use_uefi = false;
 
     // Build the QEMU arguments.
     let mut qemu_args = Vec::new();

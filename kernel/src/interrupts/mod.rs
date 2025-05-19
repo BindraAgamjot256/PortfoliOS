@@ -5,6 +5,7 @@ pub mod io_apic;
 
 use pc_keyboard::DecodedKey;
 use spin::lazy::Lazy;
+use spin::Mutex;
 use x86_64::{
     registers::control::Cr2,
     structures::{
@@ -25,6 +26,9 @@ use crate::{framebuffer::{
     gdt::DOUBLE_FAULT_IST_INDEX
 }, memory::BootInfoFrameAllocator, serial_print};
 use crate::shell::GLOBAL_SHELL;
+
+
+static INTERRUPT_TIMER_COUNT: Mutex<u64> = Mutex::new(0);
 
 fn create_idt() -> InterruptDescriptorTable {
     let mut idt = InterruptDescriptorTable::new();
@@ -77,7 +81,10 @@ pub extern "x86-interrupt" fn timer_interrupt_handler(
     _stack_frame: x86_64::structures::idt::InterruptStackFrame,
 ) {
     unsafe { FRAMEBUFFER_WRITER.force_unlock(); }
-    update_cursor();
+    *INTERRUPT_TIMER_COUNT.lock() += 1;
+    if *INTERRUPT_TIMER_COUNT.lock() % 50 == 0 {
+        update_cursor();
+    }
     let binding = LOCAL_APIC.lock();
     let apic = unsafe { binding.as_ref().unwrap().get_mut() };
     unsafe {

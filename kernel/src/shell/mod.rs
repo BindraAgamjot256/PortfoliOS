@@ -1,11 +1,16 @@
-use alloc::format;
-use alloc::string::String;
-use alloc::vec::Vec;
+use crate::{
+    framebuffer::ConsoleColor,
+    framebuffer::global_writer::{clear_screen, print_fmt},
+    framebuffer::color::ColoredWriting,
+    print,
+    println
+};
+use alloc::{
+    format,
+    string::String,
+    vec::Vec
+};
 use spin::{Lazy, Mutex};
-use crate::{print, println};
-use crate::framebuffer::color::ColoredWriting;
-use crate::framebuffer::ConsoleColor;
-use crate::framebuffer::global_writer::clear_screen;
 
 pub struct Shell {
     buffer: String,
@@ -136,9 +141,11 @@ I like the following things:
                    ~--___-___--~".fg(ConsoleColor::Red);
                     println!("{}" ,print);
                 },
-                "help" => println!("Available commands: whoami, projects, whatilike, clear, help, echo"),
-                "exit" => println!("Exiting shell..."),
-                "echo" => self.handle_echo(),
+                "help" => {
+                    println!("Available commands: whoami, projects, whatilike, clear, help, echo, shutdown, exit, portfoliofetch");
+                    println!("Try running ls...")
+                },
+                "echo" => self.err = self.handle_echo(),
                 "portfoliofetch" => {
                     println!("{}" ,"  _____           _    __      _ _  ____   _____ 
  |  __ \\         | |  / _|    | (_)/ __ \\ / ____|
@@ -151,7 +158,34 @@ I like the following things:
                         println!("PortfoliOS Version: 0.0.1");
                         println!("Developer: Agamjot Singh Bindra");
                         println!("Website: ummm... good question...");
-                        }
+                }
+
+
+                "exit" | "execute66" => {
+                    let format = "War! The Republic is crumbling under attacks by the ruthless Sith Lord, Count Dooku. There are heroes on both sides. Evil is everywhere.
+In a stunning move, the fiendish droid leader, General Grievous, has swept into the Republic capital and kidnapped Chancellor Palpatine, leader of the Galactic Senate.
+As the Separatist Droid Army attempts to flee the besieged capital with their valuable hostage, two Jedi Knights lead a desperate mission to rescue the captive Chancellor...\n";
+
+
+                for char in format.chars(){
+                    print_fmt(format_args!("{}", char), ConsoleColor::BrightYellow, ConsoleColor::Black);
+                    for _ in 0..100_000 {
+                        core::hint::spin_loop();
+                    }
+                }
+                println!("(c) Whoever made star wars episode 3...");
+                }
+                "rename" => self.err = self.handle_rename(),
+                "bye" => {
+                    println!("Bye {}! See you later!", self.name);
+                    println!("Exiting...");
+                    for _ in 0..5e6 as u128 {
+                        core::hint::spin_loop();
+                    }
+                    println!("Exiting... (c) Agamjot Singh Bindra");
+                    println!("Bye!");
+                }
+                "calc" => self.err = self.handle_calc(),
                 _ => {
                     if ["ls", "touch", "cd", "mkdir", "cat"].contains(&self.command.as_str()) {
                         println!("Bro... there is no filesystem... <add skull emoji here when emojis are supported... //todo>");
@@ -167,10 +201,73 @@ I like the following things:
         self.init();
     }
 
-    fn handle_echo(&self) {
+    fn handle_rename(&mut self) -> u8 {
+        if self.args.is_empty() {
+            println!("Usage: rename <old_name> <new_name>");
+            return 1;
+        }
+        if self.args.len() != 2 {
+            println!("Usage: rename <old_name> <new_name>");
+            return 1;
+        }
+        let old_name = &self.args[0];
+        let new_name = &self.args[1];
+        println!("Renaming {} to {}", old_name, new_name);
+        if self.name == *old_name {
+            self.name = new_name.clone();
+            println!("Renamed {} to {}", old_name, new_name);
+        } else {
+            println!("{} is not your name", old_name);
+        }
+        0
+    }
+
+    fn handle_calc(&self) -> u8{
+        if self.args.is_empty(){
+            println!("Usage: calc <num1> <operator> <num2>");
+            println!("Operators: +, -, *, /");
+            return 1;
+        }
+        if self.args.len() != 3 {
+            println!("Usage: calc <num1> <operator> <num2>");
+            return 1;
+        }
+        let num1: f64 = self.args[0].parse().unwrap_or_else(
+            |_| {
+                println!("Invalid number: {}", self.args[0]);
+                0.0
+            }
+        );
+        let num2: f64 = self.args[2].parse().unwrap_or_else(
+            |_| {
+                println!("Invalid number: {}", self.args[2]);
+                0.0
+            }
+        );
+
+        match self.args[1].as_str() {
+            "+" => println!("{} + {} = {}", num1, num2, num1 + num2),
+            "-" => println!("{} - {} = {}", num1, num2, num1 - num2),
+            "*" => println!("{} * {} = {}", num1, num2, num1 * num2),
+            "/" => {
+                if num2 == 0.0 {
+                    println!("Division by zero is not allowed");
+                } else {
+                    println!("{} / {} = {}", num1, num2, num1 / num2);
+                }
+            },
+            _ => {
+                println!("Invalid operator: {}", self.args[1]);
+            }
+
+        };
+        0
+    }
+
+    fn handle_echo(&self) -> u8 {
         if self.args.is_empty() {
             println!("Usage: echo [-c <color>] <message>");
-            return;
+            return 1;
         }
 
         // Check for the color switch: echo -c <color> <message>
@@ -195,7 +292,7 @@ I like the following things:
                 "brightwhite" => ConsoleColor::BrightWhite,
                 _ => {
                     println!("Invalid color. Supported: black, red, green, yellow, blue, magenta, cyan, white, brightblack, brightred, brightgreen, brightyellow, brightblue, brightmagenta, brightcyan, brightwhite.");
-                    return;
+                    return 1;
                 }
             };
             let message = self.args[2..].join(" ");
@@ -204,6 +301,7 @@ I like the following things:
             let message = self.args.join(" ");
             println!("{}", message);
         }
+        0
     }
 
     pub fn pop(&mut self) {

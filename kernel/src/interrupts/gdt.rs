@@ -28,15 +28,22 @@ pub(crate) static GDT: Lazy<(GlobalDescriptorTable, Selectors)> = Lazy::new(|| {
     let code_selector = gdt.append(Descriptor::kernel_code_segment());
     let data_selector = gdt.append(Descriptor::kernel_data_segment());
     let tss_selector = gdt.append(Descriptor::tss_segment(&TSS));
+    let usr_code_selector = gdt.append(Descriptor::user_code_segment());
+    let usr_data_selector = gdt.append(Descriptor::user_data_segment());
     (gdt, Selectors {
         code_selector,
         data_selector,
         tss_selector,
+        usr_code_selector,
+        usr_data_selector,
     })
 });
 
+#[derive(Clone, Copy)]
 pub(crate) struct Selectors {
     pub(crate) code_selector: SegmentSelector,
     pub(crate) data_selector: SegmentSelector,
     pub(crate) tss_selector: SegmentSelector,
+    pub(crate) usr_code_selector: SegmentSelector,
+    pub(crate) usr_data_selector: SegmentSelector,
 }

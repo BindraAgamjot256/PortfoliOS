@@ -37,8 +37,7 @@ pub fn _print(args: fmt::Arguments) {
     });
 }
 
-#[doc(hidden)]
-pub fn _print_fmt(args: fmt::Arguments, color_fg: ConsoleColor, color_bg: ConsoleColor) {
+pub fn print_fmt(args: fmt::Arguments, color_fg: ConsoleColor, color_bg: ConsoleColor) {
     with_writer(|writer| {
         use core::fmt::Write;
         writer.set_text_color(color_fg);

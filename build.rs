@@ -13,17 +13,25 @@ fn main() {
     // Set a separate variable for clarity; KERNEL_ELF is used by LLDB.
     println!("cargo:rustc-env=KERNEL_ELF={}", kernel.to_str().unwrap());
 
-    // Create a UEFI disk image.
-    let uefi_path = out_dir.join("uefi.img");
-    bootloader::UefiBoot::new(&kernel)
-        .create_disk_image(&uefi_path)
-        .unwrap();
+    let mut disk_image = bootloader::DiskImageBuilder::new(kernel);  
+    
+    disk_image.set_file_contents(
+        "a_file.txt".to_string(),
+        "Hello, world!".as_bytes().to_vec(),
+    );
 
-    // Create a BIOS disk image.
+
+    let uefi_path = out_dir.join("uefi.img");
+
     let bios_path = out_dir.join("bios.img");
-    bootloader::BiosBoot::new(&kernel)
-        .create_disk_image(&bios_path)
-        .unwrap();
+
+    disk_image
+        .create_uefi_image(uefi_path.as_path())
+        .expect("Failed to build UEFI disk image");
+
+    disk_image
+        .create_bios_image(bios_path.as_path())
+        .expect("Failed to build BIOS disk image");
 
     // Pass the disk image paths to the main runner.
     println!("cargo:rustc-env=UEFI_PATH={}", uefi_path.to_str().unwrap());
