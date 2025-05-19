@@ -1,73 +1,81 @@
-# PortfoliOS
+# 🚀 PortfoliOS  
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This project is a simple operating system written in Rust. It is a text environment based mirror for my portfolio
-project which is simultaneously being developed (currently private, for those interested). It includes a shell(AgamShell or Ash), and a simple programming language, for user scripts.  
+**PortfoliOS** is a tiny operating system written in Rust — not meant for general use, but built entirely to flex my portfolio in the most extra way possible.
 
+It runs a custom shell (AgamShell aka `ash`) and will eventually feature a custom scripting language, AI integrations, Rick Astley at boot, and zero POSIX compliance because that’s boring.
 
-## Features
+> It’s a portfolio... that *boots*.  
+> LinkedIn could never.
 
-| Feature      | Description                                             |
-|--------------|---------------------------------------------------------|
-| Framebuffer   | A simple VGA buffer for text output                    |
-| Unit Testing | Full Unit testing for the kernel (TODO)                 |
-| CI/CD        | Continuous Integration and Deployment                   |
-| Keyboard     | Keyboard input for the CLI                              |
-| CLI          | Command Line Interface                                  |
+> [!WARNING]  
+> **DO NOT RUN THIS ON ACTUAL HARDWARE.**  
+> It doesn’t even possess proper shutdown functionality yet. You’ve been warned.
 
-## Getting Started
+---
 
-### Prerequisites
+## ✨ Features
 
-- Rust nightly toolchain
-- QEMU for running the kernel
+| Feature       | Description                                                |
+|---------------|------------------------------------------------------------|
+| 🖼️ Framebuffer | Custom framebuffer with gradient/Rickroll boot visuals     |
+| 🎹 Keyboard    | PS/2 keyboard input + input buffering                     |
+| 💬 CLI         | Command Line Interface with custom shell + commands       |
+| 🧠 AI Cmds     | (Planned) Local chatbot using TinyLlama or Mixtral        |
+| 🧪 Unit Tests  | Kernel-level unit testing (WIP)                            |
+| 🚀 CI/CD       | Planned auto-build pipeline                               |
 
-### Installation
+---
 
-1. Install Rust nightly toolchain and components:
+## 🧰 Getting Started
 
-    ```sh
-    rustup install nightly
-    rustup component add rust-src --toolchain nightly
-    rustup component add llvm-tools-preview --toolchain nightly
-    ```
+### 🔧 Prerequisites
 
-2. Install QEMU:
+- Rust nightly toolchain  
+- QEMU (for running your kernel)
 
-   ```shell
-   # for Linux
-   sudo apt-get install -y qemu-system-x86
-   ```
+### 🛠 Installation
 
-   OR
-   ```shell
-   # for MacOS
-   brew install qemu
-   ```
-   OR  
-   [for Windows](https://qemu.weilnetz.de/w64/)
+```sh
+rustup install nightly
+rustup component add rust-src --toolchain nightly
+rustup component add llvm-tools-preview --toolchain nightly
+```
 
-### Running the Kernel
+#### QEMU Setup
 
-To run the kernel, run:
+- **Linux**: `sudo apt install qemu-system-x86`
+- **macOS**: `brew install qemu`
+- **Windows**: [Download here](https://qemu.weilnetz.de/w64/)
+
+---
+
+## 🏃 Running the Kernel
 
 ```sh
 cargo run
 ```
 
+(And prepare for vibes.)
 
-## TODO:
-- [x] Framebuffer (for text/image output)
-- [ ] Unit Testing
-- [ ] Full Documentation coverage
-- [x] CLI
-   - [x] Keyboard Input
-   - [x] Commands
-- [ ] Full Kernel
-- [ ] File System
-- [ ] CI/CD
-- [x] Customisable Printing
+---
 
+## 📝 TODO
 
-## Licence.
-This project is licenced under the MIT Licence. See the [License](./LICENSE) for more details
+- [x] Framebuffer support  
+- [x] Basic CLI with custom shell  
+- [x] Keyboard input  
+- [x] `portfoliofetch` (like neofetch, but better 😎)  
+- [ ] Proper scrolling + shell history  
+- [ ] File system (eventually)  
+- [ ] Scripting language support  
+- [ ] Shutdown command that Rickrolls and hangs  
+- [ ] Unit testing framework  
+- [ ] CI/CD  
+- [ ] Fully documented code (lol maybe)
+
+---
+
+## 📜 License
+
+MIT. Do whatever you want, just don’t claim you built it unless your name is Agamjot Singh Bindra.
